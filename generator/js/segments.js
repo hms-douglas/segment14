@@ -80,7 +80,7 @@ const SEGMENTS_SYMBOLS = {
     "apostrophe" : [j],
     "single_quote" : [j],
     "double_quote" : [b, j],
-    "cipher" : [a, c, d, f, g, h, k, m],
+    "cipher" : [a, c, d, f, g, h, j, m],
     "e_comercial" : [a, d, e, g, i, j, n],
     "gt" : [k, n],
     "lt" : [i, l],

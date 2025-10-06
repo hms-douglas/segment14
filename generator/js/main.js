@@ -1,5 +1,6 @@
 const PROJECT_URL = "https://github.com/hms-douglas/segment14",
-      FONTS_DOWNLOAD_URL = PROJECT_URL + "/tree/master/TTFs/Segment14.ttf",
+      FONTS_DOWNLOAD_URL_TTF = PROJECT_URL + "/tree/master/Fonts/Segment14.ttf",
+      FONTS_DOWNLOAD_URL_WOFF = PROJECT_URL + "/tree/master/Fonts/Segment14.woff",
       EL_CONTAINER_CHARS = document.getElementById("containerChars"),
       EL_CONTAINER_COLORPICKER = document.getElementById("colorPicker"),
       EL_CONTAINER_SETTINGS = document.getElementById("containerSettings"),
@@ -47,7 +48,11 @@ function initListeners() {
     })
 
     document.getElementById("downloadTtf").addEventListener("click", () => {
-        window.open(FONTS_DOWNLOAD_URL, "_black");
+        window.open(FONTS_DOWNLOAD_URL_TTF, "_black");
+    });
+
+    document.getElementById("downloadWoff").addEventListener("click", () => {
+        window.open(FONTS_DOWNLOAD_URL_WOFF, "_black");
     });
 
     document.getElementById("projectGithub").addEventListener("click", () => {
