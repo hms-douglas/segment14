@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Segment14 - Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="generator/css/style.css">
+</head>
+<body>
+    <div id="container">
+        <div id="containerChars" class="hideBase"></div>
+
+        <div id="containerSettings">
+            <div class="containerSettingsCenter">
+                <div class="containerSettingsGroup containerSettingsGroup--btns">
+                    <button id="downloadTtf">Download TTF</button>
+                    <button id="projectGithub">Project on github</button>
+                </div>
+
+                <div class="containerSettingsGroup">
+                    <div class="checkbox">
+                        <input id="showBase" type="checkbox"/>
+                        <label for="showBase"></label>
+                        <span>Show base</span>
+                    </div>
+                </div>
+
+                <div class="containerSettingsGroup">
+                    <label for="color">Color</label>
+                    <input placeholder="" readonly="" id="color">
+
+                    <label for="png_height">Height (png / px)</label>
+                    <input type="number" id="png_height" step="1" min="1" onkeydown="if(this.key==='.'||this.key===','||this.key==='-'){this.preventDefault();}" oninput="this.value = Math.abs(this.value.replace(/[^0-9]*/g,''))">
+
+                    <label for="png_width">Width (png / px)</label>
+                    <input type="number" id="png_width" step="1" min="1" onkeydown="if(this.key==='.'||this.key===','||this.key==='-'){this.preventDefault();}" oninput="this.value = Math.abs(this.value.replace(/[^0-9]*/g,''))">
+
+                    <button id="generatePng">Generate PNGs</button>
+                    <button id="generateSvg">Generate SVGs</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="colorPicker"></div>
+
+    <div class="popup" id="LOADING">
+        <div class="utils-center" id="LOADER">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+
+        <div class="utils-center" id="PROGRESS">
+            <div></div>
+        </div>
+    </div>
+
+    <script src="generator/js/jszip.js"></script>
+    <script src="generator/js/r9picker.min.js"></script>
+    <script src="generator/js/svg.js"></script>
+    <script src="generator/js/segments.js"></script>
+    <script src="generator/js/zip.js"></script>
+    <script src="generator/js/main.js"></script>
+</body>
+</html>
