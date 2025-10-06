@@ -1,6 +1,6 @@
 const PROJECT_URL = "https://github.com/hms-douglas/segment14",
-      FONTS_DOWNLOAD_URL_TTF = PROJECT_URL + "/tree/master/Fonts/Segment14.ttf",
-      FONTS_DOWNLOAD_URL_WOFF = PROJECT_URL + "/tree/master/Fonts/Segment14.woff",
+      FONTS_DOWNLOAD_URL_TTF = "https://hms-douglas.github.io/segment14/Fonts/Segment14.ttf",
+      FONTS_DOWNLOAD_URL_WOFF = "https://hms-douglas.github.io/segment14/Fonts/Segment14.woff",
       EL_CONTAINER_CHARS = document.getElementById("containerChars"),
       EL_CONTAINER_COLORPICKER = document.getElementById("colorPicker"),
       EL_CONTAINER_SETTINGS = document.getElementById("containerSettings"),
