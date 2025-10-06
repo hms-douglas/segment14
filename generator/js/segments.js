@@ -101,4 +101,5 @@ const SEGMENTS_SYMBOLS = {
     "braces_close" : [a, d, h, k, n],
     "percentage" : [c, f, k, l],
     "exclamation_mark" : [j, m],
+    "dot" : [dot]
 };

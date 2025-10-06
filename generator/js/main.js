@@ -142,9 +142,11 @@ function calculateAmountToGenerate() {
 
     AMOUNT_TO_GENERATE += Object.keys(SEGMENTS_CONTAINER).length;
     AMOUNT_TO_GENERATE += Object.keys(SEGMENTS_NUMBERS).length;
-    AMOUNT_TO_GENERATE += Object.keys(SEGMENTS_SYMBOLS).length;
     AMOUNT_TO_GENERATE += Object.keys(SEGMENTS_LETTERS_LOWER).length;
     AMOUNT_TO_GENERATE += Object.keys(SEGMENTS_LETTERS_UPPER).length;
+    AMOUNT_TO_GENERATE += Object.keys(SEGMENTS_SYMBOLS).length;
+
+    AMOUNT_TO_GENERATE += 1; //Colon
 }
 
 function renderChars() {
@@ -156,6 +158,7 @@ function renderChars() {
     addChars(ZIP_FOLDER_NAME_LETTERS + " - " + ZIP_SUB_FOLDER_NAME_UPPER, SEGMENTS_LETTERS_UPPER);
     addChars(ZIP_FOLDER_NAME_LETTERS + " - " + ZIP_SUB_FOLDER_NAME_LOWER, SEGMENTS_LETTERS_LOWER);
     addChars(ZIP_FOLDER_NAME_SYMBOLS, SEGMENTS_SYMBOLS);
+    addColon();
 }
 
 function addChars(name, segments) {
@@ -205,6 +208,35 @@ function addChar(group, name, segment) {
     group.appendChild(imageContainer);
 }
 
+function addColon() {
+    const svg = SVG_getSVGColonString();
+
+    const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
+
+    const url = URL.createObjectURL(svgBlob);
+
+    const imageContainer = document.createElement("div");
+
+    imageContainer.className = "charContainer charContainer--colon";
+
+    const image = new Image();
+
+    image.height = SVG_VIEW_HEIGHT;
+    image.width = SVG_COLON_VIEW_WIDTH;
+
+    image.src = url;
+
+    imageContainer.appendChild(image);
+
+    const imageName = document.createElement("span");
+
+    imageName.innerHTML = ITEM_COLON_NAME;
+
+    imageContainer.appendChild(imageName);
+
+    document.querySelector(".charGroup:last-of-type").appendChild(imageContainer);
+}
+
 function SVG_generateZip() {
     LOADING_show();
 
@@ -231,6 +263,14 @@ function SVG_generateFolder(parent, folderName, items) {
 
     for(const key in items) {
         folder.file(key + ".svg", SVG_generateSvgString(items[key]));
+
+        AMOUNT_GENERATED++;
+
+        LOADING_incrementProgress();
+    }
+
+    if(folderName == ZIP_FOLDER_NAME_SYMBOLS) {
+        folder.file(ITEM_COLON_NAME + ".svg", SVG_getSVGColonString());
 
         AMOUNT_GENERATED++;
 
@@ -263,6 +303,10 @@ function PNG_generateFolder(parent, folderName, items) {
 
     for(const key in items) {
         PNG_generateFile(folder, key, items[key])
+    }
+
+    if(folderName == ZIP_FOLDER_NAME_SYMBOLS) {
+        PNG_generateColonFile(folder);
     }
 }
 
@@ -297,6 +341,45 @@ function PNG_generateFile(parent, fileName, segments) {
 
         canvas.toBlob((blob) => {
             parent.file(fileName + ".png", blob);
+
+            PNG_imageGenerated();
+        })
+    };
+
+    image.src = url;
+}
+
+function PNG_generateColonFile(parent) {
+    const svg = SVG_getSVGColonString();
+
+    const svgBlob = new Blob([svg], {type: "image/svg+xml;charset=utf-8"});
+
+    const url = URL.createObjectURL(svgBlob);
+
+    const image = new Image();
+
+    if(PNG_HEIGHT <= 0 || PNG_WIDTH <= 0) {
+        image.height = SVG_VIEW_HEIGHT;
+        image.width = SVG_COLON_VIEW_WIDTH;
+    } else {
+        image.height = PNG_HEIGHT;
+        image.width = Math.trunc((SVG_COLON_VIEW_WIDTH * PNG_HEIGHT) / SVG_VIEW_HEIGHT);
+    }
+
+    image.onload = () => {
+        const canvas = document.createElement("canvas");
+
+        canvas.width = image.width;
+        canvas.height = image.height;
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.drawImage(image, 0, 0);
+
+        URL.revokeObjectURL(url);
+
+        canvas.toBlob((blob) => {
+            parent.file(ITEM_COLON_NAME + ".png", blob);
 
             PNG_imageGenerated();
         })

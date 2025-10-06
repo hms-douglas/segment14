@@ -116,10 +116,14 @@ body {
 .charGroup .charContainer {
     position: relative;
     display: inline-block;
-    width: 8%;
+    height: 10vw;
+    width: 6vw;
     margin: 5px;
     margin-bottom: calc(var(--d_char_height) * 2);
     background-color: var(--c_char_background);
+}
+.charGroup .charContainer.charContainer--colon::before {
+    display: none;
 }
 .charGroup .charContainer::before {
     position: absolute;
@@ -146,8 +150,16 @@ body {
 }
 .charGroup .charContainer img {
     width: 100%;
-    height: 20%;
+    height: 100%;
     user-select: none;
+}
+.charGroup .charContainer.charContainer--colon {
+    background-color: transparent;
+    text-align: center;
+}
+.charGroup .charContainer.charContainer--colon img {
+    width: 1vw;
+    background-color: var(--c_char_background);
 }
 #containerSettings {
     display: inline-block;
@@ -395,6 +407,11 @@ button:hover,
         margin-bottom: 5px;
     }
     .charGroup .charContainer {
-        width: 13%;
+        width: 13vw;
+        height: 21.66vw;
+    }
+    .charGroup .charContainer.charContainer--colon img {
+        width: 2.166vw;
+        background-color: var(--c_char_background);
     }
 }
